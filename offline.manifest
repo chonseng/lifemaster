@@ -1,0 +1,33 @@
+CACHE MANIFEST
+      
+# This is a comment
+# version 1
+# version 2
+# version 3
+# version 4
+
+
+CACHE:
+/css/style.css
+/js/compare.js
+/js/discount.js
+/js/free.js
+/js/tip.js
+/js/jquery-1.9.1.min.js
+/images/apple-touch-icon-precomposed.png
+/images/diamond_bg.png
+/images/app_icon.png
+/images/tab_active.png
+/images/tab_normal.png
+/images/toggle_bg.png
+/images/toggle_btn.png
+/images/fb.png
+/index.html
+/HelveticaNeueLTPro-Lt.otf
+
+
+FALLBACK:
+/ /index.html
+
+NETWORK:
+*

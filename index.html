@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+   <meta charset='utf-8'>
+   <link rel="stylesheet" type="text/css" href="css/style.css">
+   <meta name="viewport" content="initial-scale=1, user-scalable=no">
+   <link rel="apple-touch-icon-precomposed" size="144x144" href="images/apple-touch-icon-precomposed.png">
+	<meta name="title" content="LifeMaster(App)" />
+   <meta name="description" content="Shared from LifeMaster(App)" />
+   <meta name="apple-mobile-web-app-capable" content="yes">
+   <title>LifeMaster</title>
+</head>
+<body>
+	<div class="app-container">
+		<div id="discount-title-bar"  class="title-bar"><span class="title" data-lang="discount">Discount</span><a id="discount-reset" class="reset-btn" data-lang="reset">Reset</a></div>
+		<div id="free-title-bar"  class="title-bar"><span class="title" data-lang="free">Free</span><a id="free-reset" class="reset-btn" data-lang="reset">Reset</a></div>
+		<div id="tip-title-bar"  class="title-bar"><span class="title" data-lang="gratuity">Gratuity</span><a id="tip-reset" class="reset-btn" data-lang="reset">Reset</a></div>
+		<div id="compare-title-bar"  class="title-bar"><span class="title" data-lang="compare">Compare</span><a id="compare-reset" class="reset-btn" data-lang="reset">Reset</a></div>
+		<div id="about-title-bar"  class="title-bar"><a href="#" id="back-to-about" data-lang="about">Setting</a><span class="title" data-lang="about" id="titleAbout">About</span><span class="title" data-lang="help" id="titleHelp">Help</span></div>
+		<div class="view-container">
+			<div id="one" class="view">
+				<div><span data-lang="originalPrice">Original Price</span>:</div>
+				<input type="number" placeholder="$" id="discount-input">
+				<div class="option"><div class="label add-lb" data-lang="surcharge10">10% Surcharge</div><a id="a1" class="toggle"></a></div>
+				<div class="option"><div class="label add-lb" data-lang="surcharge15">15% Surcharge</div><a id="a15" class="toggle"></a></div>
+				<div class="option"><div class="label add-lb"><input type="number" id="tf-ac" ><span data-lang="surchargeCustom">% Surcharge</span></div><a id="ac"class="toggle"></a></div>
+				<div class="option"><div class="label discount-lb" data-lang="off5">5% Off</div><a id="d95" class="toggle"></a></div>
+				<div class="option"><div class="label discount-lb" data-lang="off10">10% Off</div><a id="d9" class="toggle"></a></div>
+				<div class="option"><div class="label discount-lb" data-lang="off20">20% Off</div><a id="d8" class="toggle"></a></div>
+				<div class="option"><div class="label discount-lb"><input type="number" id="tf-dc"><span data-lang="offCustom">% Off</span></div><a id="dc" class="toggle"></a></div>
+				<div data-lang="result"># Result</div>	
+				<div><div id="discount-saving-text" data-lang="saved">Saved:</div><div id="discount-saving">$0.0</div></div>
+				<div><div id="discount-result-text" data-lang="grandTotal">Grand Total:</div><div id="discount-result" class="big-font">$0.0</div></div>
+			</div>
+			<!-- One End -->
+			<div id="two" class="view">
+		
+				<section>
+					<div class="ori-price"><span>1. <span data-lang="originalPrice">Original Price:</span></span><input type="number" id="tf-ori-price"></div>
+				</section>
+
+				<section>
+					<div id="user-buy">
+						<div class="row">
+							<div data-lang="whatDoYouLike">2. What do you like?</div>
+							<div class="segment" id="free-seg">
+								<a href="#" id="seg-total" class="segment-two selected" data-lang="iNeed">I Need</a>
+								<a href="#" id="seg-buy" class="segment-two" data-lang="iWillBuy">I Will Buy</a>
+							</div>
+							<a href="#" id="help-btn">?</a>
+						</div>
+						<div>
+							<input type="number" id="tf-buy"><span data-lang="items"> items</span>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<div>3. <span data-lang="discount">Discount</span></div>
+					<div><span class="txt-buy">Buy </span><input type="number" id="tf-cond-buy" class="cond"> Get <input type="number" id="tf-cond-free" class="cond"><span class="txt-free"> Free</span></div>
+	<!-- 				<div class="user-buy"><span id="seg"><a id="seg-buy" class="selected">Buy</a>/<a id="seg-total">Total</a></span><input type="number" id="tf-buy"></div> -->
+				</section>
+
+				<section>
+					<div data-lang="result"># Result</div>
+					<div class="free-price average"><div class="text" data-lang="avgPrice">Average Price Per Item</div><div id="per-price" class="result">-</div></div>
+					<div class="free-price save"><div class="text" data-lang="willSave">You'll Save</div><div id="save-price" class="result">-</div></div>
+					<div class="free-price pay"><div class="text" data-lang="willPay">You'll Pay</div><div id="total-price" class="result">-</div></div>
+					<div id="buy-and-get"></div>
+				</section>
+
+				<section id="smarter-tips">
+					<div id="tips-text"></div>
+					<div>
+						<div class="row">
+							<div class="two col"><input type="button" id="btn-add" class="tips-btn" value="123"></div>
+							<div class="two col"><input type="button" id="btn-sub" class="tips-btn"></div>
+						</div>
+						<div id="tips-end" class="center"></div>
+					</div>
+				</section>
+
+				<div id="free-help">
+					<div class="help-text">
+						<h3 data-lang="help">Help</h2>
+						<h4>“<span data-lang="iNeed">I Need</span>”</h4>
+						<p data-lang="helpINeed">The amount of items you will have eventually.</p>
+						<h4>“<span data-lang="iWillBuy">I Will Buy</span>”</h4>
+						<p data-lang="helpIWillBuy">The amount of items you are going to purchase, without counting the free items.</p>
+					</div>
+					<a href="#" id="ok-btn">OK</a>
+				</div>
+			</div>
+			<!-- Two End -->
+			<div id="three" class="view">
+				<section>
+					<div class="row">
+						<div class="two col">1. <span data-lang="subTotal">Sub total</span>:</div>
+						<div class="two col"><input type="number" id="user-total"></div>
+					</div>
+				</section>
+
+				<section>
+					<div class="row">
+						<div class="one col">2. <span data-lang="tax">Tax</span>:</div>
+						<div class="two col"><input type="number" id="user-tax">% </div>
+						<div class="one col"><a id="tax-toggle" class="toggle"></a></div>
+					</div>
+				</section>
+
+				<section>
+				<div>3. <span data-lang="tip">Tip</span>:</div>
+					<div class="segment row">
+						<a href="#" id="tipNo" class="tipSeg segment-five selected" data-tip="0">No</a>
+						<a href="#" id="tip10" class="tipSeg segment-five" data-tip="0.1">10%</a>
+						<a href="#" id="tip15" class="tipSeg segment-five" data-tip="0.15">15%</a>
+						<a href="#" id="tip18" class="tipSeg segment-five" data-tip="0.18">18%</a>
+						<a href="#" id="tipMore" class="tipSeg segment-five" data-tip="more" data-lang="custom">Custom</a>
+					</div>
+
+					<div id="tipMoreField" class="row">
+						<div class="two col"><span data-lang="custom">Custom</span>:</div>
+						<div class="two col"><input type="number" id="user-tip">%</div>
+					</div>
+				</section>
+
+				<section>
+					<div class="row">
+						<div class="three col">4. <span data-lang="howManyGuests">How Many Guests?</span></div>
+						<div class="one col"><input type="number" id="user-people"></div>
+					</div>
+				</section>
+
+				<section>
+					<div data-lang="result"># Result</div>
+					<div class="tip-price tip"><div class="txt-result" data-lang="totalGratuity">Total Gratuity</div><div id="result-tip" class="tip-result">-</div></div>
+
+					<div class="tip-price grand-total"><div class="txt-result" data-lang="grandTotal">Grand total</div><div id="grand-total" class="tip-result">-</div></div>
+					<div class="tip-price per-total"><div class="txt-result" data-lang="amountPerGuest">Amount Per Guest</div><div id="per-total" class="tip-result big-font">-</div></div>
+				</section>
+			</div>
+			<!-- Three End -->
+			<div id="four" class="view">
+				<section>
+					<div class="yellow-text" data-lang="cheapest">Highlighted cells are the CHEAPEST!</div>
+				</section>
+
+				<section>
+					<span>1. <span data-lang="whatToBeCompared">What to be compared</span>:</span>
+					<!-- <select name="" id="type">
+						<option value="volume">Volume</option>
+						<option value="weight">Weight</option>
+						<option value="length">Length</option>
+						<option value="area">Area</option>
+					</select> -->
+					<div id="type" class="segment row">
+						<a href="#" id="unitVolume" class="unitSeg segment-four selected"  data-unit="volume" data-lang="volume">Volume</a>
+						<a href="#" id="unitWeight" class="unitSeg segment-four"  data-unit="weight" data-lang="weight">Weight</a>
+						<a href="#" id="unitLength" class="unitSeg segment-four"  data-unit="length" data-lang="length">Length</a>
+						<a href="#" id="unitArea" class="unitSeg segment-four"  data-unit="area" data-lang="area">Area</a>
+					</div>
+				</section>
+				
+				<section>
+					<div>2. <span data-lang="enterItemDetails">Enter item details</span>:</div>
+					<div>
+						<div class="price-column caption" data-lang="price">Price</div>
+						<div class="portion-column caption" data-lang="portion">Portion</div>
+						<div class="unit-column caption" data-lang="unit">Unit</div>
+					</div>
+
+					<form action="index.html" method="get" id="item-form">
+						<div id="item1" class="item">
+							<div class="small-font"><span data-lang="thing">Item</span> 1</div>
+							<input type="number" placeholder="$" class="price price-column" id="price1" name="price1">
+							<input type="number" placeholder="" class="portion portion-column" id="amount1" name="amount1">
+							<select class="unit unit-column" id="unit1" name="unit1">
+							
+							</select>
+						</div>
+
+						<div id="item2" class="item">
+							<div class="small-font"><span data-lang="thing">Item</span> 2</div>
+							<input type="number" placeholder="$" class="price price-column" id="price2" name="price2">
+							<input type="number" placeholder="" class="portion portion-column" id="amount2" name="amount2">
+							<select class="unit unit-column" id="unit2" name="unit2">
+								
+							</select>
+						</div>
+
+						<div id="item3" class="item">
+							<div class="small-font"><span data-lang="thing">Item</span> 3</div>
+							<input type="number" placeholder="$" class="price price-column" id="price3" name="price3">
+							<input type="number" placeholder="" class="portion portion-column" id="amount3" name="amount3">
+							<select class="unit unit-column" id="unit3" name="unit3">
+								
+							</select>
+						</div>
+
+						<div id="item4" class="item">
+							<div class="small-font"><span data-lang="thing">Item</span> 4</div>
+							<input type="number" placeholder="$" class="price price-column" id="price4" name="price4">
+							<input type="number" placeholder="" class="portion portion-column" id="amount4" name="amount4">
+							<select class="unit unit-column" id="unit4" name="unit4">
+								
+							</select>
+						</div>
+
+						<div id="item5" class="item">
+							<div class="small-font"><span data-lang="thing">Item</span> 5</div>
+							<input type="number" placeholder="$" class="price price-column" id="price5" name="price5">
+							<input type="number" placeholder="" class="portion portion-column" id="amount5" name="amount5">
+							<select class="unit unit-column" id="unit5" name="unit5">
+								
+							</select>
+						</div>						
+					</form>
+				</section>
+				<!-- <section>
+					<div data-lang="shareResult">Share your result</div>
+					<div class="row">
+						<div class="two col center">
+							<a href="#" class="facebook share-compare-btn share-btn" target=blank></a>
+							<div>Facebook</div>
+						</div>
+						<div class="two col center">
+							<a href="#" class="twitter share-compare-btn share-btn" target=blank></a>
+							<div>Twitter</div>
+						</div>
+					</div>
+				</section> -->
+
+			</div>
+			<!-- Four End -->
+			<div id="five" class="view">
+				<section>
+					<img src="images/app_icon.png" class="icon" alt="LifeMaster Icon">
+					
+					<div class="app name">LifeMaster</div>
+					<div class="app vesion">Version 2.0</div>
+					<div class="row">
+						<div class="one col" data-lang="author">Author</div>
+						<div class="three col">謝俊昇 Che, Chon Seng</div>
+					</div>
+					<div data-lang="language">Language</div>
+					<div class="row">
+						<div class="three-part col"><a href="#" id="lang-en-us" class="flag"></a></div>
+						<div class="three-part col"><a href="#" id="lang-zh-cn" class="flag"></a></div>
+						<div class="three-part col"><a href="#" id="lang-zh-tw" class="flag"></a></div>
+					</div>
+					<div class="table-cells">
+						<a href="#" id="intro-btn" class="table-cell more" data-lang="help">Help</a>
+						<a href="mailto:chonseng38@gmail.com" class="table-cell" data-lang="contact">Contact Me</a>
+					</div>
+					<div class="row">
+						<div class="one col" data-lang="email">Email</div>
+						<div class="three col">chonseng38@gmail.com</div>
+					</div>
+				</section>
+				<section>
+					<div data-lang="tellFriends">Tell your friends</div>
+					<div class="row">
+						<div class="two col center">
+							<a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flifemaster.chonseng.info%2F" class="facebook share-btn" target=blank></a>
+							<div>Facebook</div>
+						</div>
+						<div class="two col center">
+							<a href="https://twitter.com/share?url=http%3A%2F%2Flifemaster.chonseng.info%2F" class="twitter share-btn" target=blank></a>
+							<div>Twitter</div>
+						</div>
+					</div>	
+				</section>
+				<section>
+					<div data-lang="qrCode">QR Code</div>
+					<div class="qr">
+						<img src="images/qr.png" alt="">
+					</div>
+				</section>
+			</div>
+			<!-- Five End -->
+				<div id="intro">
+						<a href="#" class="help-toggle h4 table-cell"><span data-lang="compare">Compare</span><span class="plus">+</span></a>
+						<div>
+							<p data-lang="introCompare">
+								Being confused by calculating the price of items packaged in different portions? Enter multiple items’ price, portion, and unit (volume/weight/length/area). We will calculate the most inexpensive item for you.
+							</p>
+						</div>
+						<a href="#" class="help-toggle h2 table-cell"><span data-lang="free">Free</span><span class="plus">+</span></a>
+						<div>
+							<p data-lang="introFree1">
+								Enter the number of free item(s) you will get after purchasing a certain amount of product(s). And then you will know the most inexpensive way to get the maximum number of item. 
+							</p>
+							<p data-lang="introFree2">
+								“I need”: The amount of items you will have eventually. For example, you will need 15 items in total, including the free items. We will tell you how many items you should pay for and how many free item you will receive to reach the 15 items goal. 
+							</p>
+							<p data-lang="introFree3">
+								“I Will Buy”: The amount of items you are going to pay for, without counting the free items. For instance, you are going to pay for 10 items and there is a buy 4 get 1 free discount. We will tell you to grab 12 items in total in order to receive 2 free items. 
+							</p>
+						</div>
+						<a href="#" class="help-toggle h3 table-cell"><span data-lang="gratuity">Gratuity</span><span class="plus">+</span></a>
+						<div>
+							<p data-lang="introGratuity">
+								After enjoying your meal, simply enter the price, tax rate, and the gratuity percentage and we will calculate the price for each person for you.
+							</p>
+						</div>
+						
+						<a href="#" class="help-toggle h1 table-cell last"><span data-lang="discount">Discount</span><span class="plus">+</span></a>
+						<div>
+							<p data-lang="introDiscount">
+								First, insert the price of an item. And then apply the amount of surcharge or discount. The grand total price and how much you saved will be displayed afterwards. 
+							</p>
+						</div>
+				</div>
+		</div>
+		<div class="bottom">
+			<div id="tab-bar">
+				<div id="tab-four" class="tab">
+					<a href="#">
+						<div>
+							<div class="tab_icon t4"></div>
+							<div class="tab_text" data-lang="compare">Compare</div>
+						</div>
+					</a>
+				</div>
+				<div id="tab-two" class="tab">
+					<a href="#">
+						<div>
+							<div class="tab_icon t2"></div>
+							<div class="tab_text" data-lang="free">Free</div>
+						</div>
+					</a>
+				</div>
+				<div id="tab-three" class="tab">
+					<a href="#">
+						<div>
+							<div class="tab_icon t3"></div>
+							<div class="tab_text" data-lang="gratuity">Gratuity</div>
+						</div>
+					</a>
+				</div>
+				<div id="tab-one" class="tab">
+					<a href="#">
+						<div>
+							<div class="tab_icon t1"></div>
+							<div class="tab_text" data-lang="discount">Discount</div>
+						</div>
+					</a>
+				</div>
+				
+				<div id="tab-five" class="tab">
+					<a href="#">
+						<div>
+							<div class="tab_icon t5"></div>
+							<div class="tab_text" data-lang="about">About</div>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="js/jquery-2.0.3.min.js"></script>
+	<script src="js/jquery.i18n.properties-min-1.0.9.js"></script>
+	<script src="js/discount.js"></script>
+	<script src="js/compare.js"></script>
+	<script src="js/free.js"></script>
+	<script src="js/tip.js"></script>
+	<script src="cordova_plugins.js"></script>
+	<script src="cordova.js"></script>
+	<script>
+
+	function lang(key) {
+	    return jQuery.i18n.prop(key);
+	}
+
+		$(function(){
+
+			// Language Begin
+
+			
+
+			function loadLanguage(lang) {
+			    jQuery.i18n.properties({
+			        name:'International', 
+			        path:'bundle/', 
+			        mode:'both',
+			        language: lang,
+			        callback: function() {
+			            updatePage();
+			        }
+			    });
+			}
+
+			function updatePage() {
+			    $("[data-lang]").each(function(){
+			        $(this).text( lang( $(this).data("lang") ) );
+			    });
+
+			     $("[data-html]").each(function(){
+			        $(this).html( lang( $(this).data("html") ) );
+			        helpMargin();
+			    });
+
+			    // refresh "free" tip
+			    cal();
+
+			    // refresh the dicount cal method
+			    acChange();
+			    dcChange();
+
+			    // compare
+			    changeType();
+			}
+
+
+
+			$("#lang-zh-tw").click(function(){
+			    loadLanguage("zh-TW");
+
+			    $("#lang-"+localStorage["lang"].toLowerCase()).removeClass("selected");
+			    $(this).addClass("selected");
+
+			    localStorage["lang"] = "zh-TW";
+			    return false;
+			})
+
+			$("#lang-zh-cn").click(function(){
+			    loadLanguage("zh-CN");
+
+			    $("#lang-"+localStorage["lang"].toLowerCase()).removeClass("selected");
+			    $(this).addClass("selected");
+
+			    localStorage["lang"] = "zh-CN";
+			    return false;
+			})
+
+			$("#lang-en-us").click(function(){
+			    loadLanguage("en-US");
+
+			    $("#lang-"+localStorage["lang"].toLowerCase()).removeClass("selected");
+			    $(this).addClass("selected");
+
+			    localStorage["lang"] = "en-US";
+			    return false;
+			})
+
+			if (!localStorage["lang"])
+				localStorage["lang"] = "en-US";
+
+			var savedLang = localStorage["lang"];
+			$("#lang-"+savedLang.toLowerCase()).addClass("selected");
+
+			loadLanguage(localStorage["lang"]);
+
+			// Language End	
+
+			var width = document.width;
+			var paddingLeft = (width-300)/2; 
+			var marginLeft = -paddingLeft;
+			$(".table-cell").css({
+				"width" : document.width,
+				"margin-left" : marginLeft,
+				"padding-left" : paddingLeft
+			});
+
+			/* config the intro margin */
+			function helpMargin() {
+				var viewHeight = $("#five").height();
+				$("#intro").css({
+					"margin-top": -viewHeight
+				});
+			}
+
+			helpMargin();
+
+
+
+			$("#back-to-about").hide();
+			$("#intro").css({"position":"absolute"});
+
+			$("#intro-btn").click(function(){
+				$("#intro").css({"position":"relative"});
+				$("#five").css({
+					"right":"100%"
+				});
+				$("#intro").css({
+					"left":"0"
+				});
+
+					// $("#about-title-bar .title").text("Help");
+					$("#titleHelp").show();
+					$("#titleAbout").hide();
+
+				$("#back-to-about").fadeIn(300);
+			})
+
+			$("#titleHelp").hide();	
+
+			$("#back-to-about").click(function(){
+				$("#five").css({
+					"right":"0"
+				});
+				$("#intro").css({
+					"left":"100%"
+				});
+
+				// $("#about-title-bar .title").text("About");
+				$("#titleHelp").hide();
+				$("#titleAbout").show();
+
+				$("#back-to-about").fadeOut(300,function(){
+					$("#intro").css({"position":"absolute"});
+				});
+			})
+
+			$(".help-toggle").click(function(){
+
+				if ($(this).hasClass("open")) {
+					$(this).removeClass("open");
+					$(this).next().removeClass("open");
+				}
+				else {
+					$(".help-toggle").removeClass("open");
+					$(".help-toggle + div").removeClass("open");
+					$(this).addClass("open");
+					$(this).next().addClass("open");
+				}
+				
+			})
+
+			function hideAllViews() {
+				$("#one").hide();
+				$("#two").hide();
+				$("#three").hide();
+				$("#four").hide();
+				$("#five").hide();
+			}
+
+			function removeSelected() {
+				$("#tab-one").removeClass("selected");
+				$("#tab-two").removeClass("selected");
+				$("#tab-three").removeClass("selected");
+				$("#tab-four").removeClass("selected");
+				$("#tab-five").removeClass("selected");
+			}
+
+			// function resizeViewHeight() {
+			// 	if (window.innerHeight-50-40 < $(".view-container").height()) {
+			// 		$(".view-container").css("overflow-y","scroll");
+			// 	}
+			// 	else {
+			// 		$(".view-container").css("overflow-y","hidden");
+			// 	}
+
+			// 	$(".view-container").css("height",function(){
+			// 		return window.innerHeight-50-40;
+			// 	});
+			// }
+
+			// function setTitle(title, resetId) {
+			// 	$("#title").text(title);
+			// 	document.querySelector("#title + a").id = resetId;
+			// }
+
+
+			// resizeViewHeight(); /* Resize when open */
+			// $(window).resize(function(){
+			// 	resizeViewHeight();	
+
+			// })
+
+
+			var titleArr = {
+				one : "discount",
+				two : "free",
+				three : "tip",
+				four : "compare",
+				five : "about",
+			}
+
+
+			hideAllViews();
+			$(".title-bar").hide();
+
+			
+			function getUrlParams() {
+			  var params = {};
+			  window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str,key,value) {
+			    params[key] = value;
+			  });
+			 
+			  return params;
+			}
+			var params = getUrlParams();
+
+			var loadView = "one";
+			if (params["price1"]!=undefined) {
+				localStorage["view"] = "four";
+			}
+			
+			if (localStorage["view"] != undefined) {
+				loadView = localStorage["view"];
+			}
+
+			$("#"+loadView).show();
+			$("#"+titleArr[loadView]+"-title-bar").show();
+			$("#tab-"+loadView).addClass("selected");
+
+			$("#tab-one").click(function(){
+				hideAllViews();
+				$("#one").show();
+				removeSelected();
+				$(this).addClass("selected");
+
+				//save current page
+				localStorage["view"] = "one";
+
+				//change title
+				$(".title-bar").hide();
+				$('#discount-title-bar').show();
+
+				$("#intro").hide();
+			})
+
+			$("#tab-two").click(function(){
+				hideAllViews();
+				$("#two").show();
+				removeSelected();
+				$(this).addClass("selected");
+
+				//save current page
+				localStorage["view"] = "two";
+
+				//change title
+				$(".title-bar").hide();
+				$('#free-title-bar').show();
+
+				$("#intro").hide();
+			})
+
+			$("#tab-three").click(function(){
+				hideAllViews();
+				$("#three").show();
+				removeSelected();
+				$(this).addClass("selected");
+
+				//save current page
+				localStorage["view"] = "three";
+
+				//change title
+				$(".title-bar").hide();
+				$('#tip-title-bar').show();
+
+				$("#intro").hide();
+			})
+
+			$("#tab-four").click(function(){
+				hideAllViews();
+				$("#four").show();
+				removeSelected();
+				$(this).addClass("selected");
+
+				//save current page
+				localStorage["view"] = "four";
+
+				//change title
+				$(".title-bar").hide();
+				$('#compare-title-bar').show();
+
+				$("#intro").hide();
+			})
+
+			$("#tab-five").click(function(){
+				hideAllViews();
+				$("#five").show();
+				removeSelected();
+				$(this).addClass("selected");
+
+				//save current page
+				localStorage["view"] = "five";
+
+				//change title
+				$(".title-bar").hide();
+				$('#about-title-bar').show();
+
+				$("#intro").show();
+			})
+
+			
+			
+		})
+	</script>
+</body>
+</html>
