@@ -61,7 +61,7 @@ $("#tipMoreField").hide();
 
 function calTip() {
 	total = parseFloat($("#user-total").val());
-	tax = parseInt($("#user-tax").val())/100+1;
+	tax = parseFloat($("#user-tax").val())/100+1;
 
 	var dataTip = $(".tipSeg.selected").data('tip');
 	if (dataTip == "more") {
@@ -73,15 +73,16 @@ function calTip() {
 
 
 	// tip = parseInt($("#user-tip").val())/100+1;
-	head = parseInt($("#user-people").val());
+	if ($("#user-people").val()=="") head = 1;
+	else head = parseInt($("#user-people").val());
 
 	if (!taxIsOpen) tax=1;
 	// if (!tipIsOpen) tip=1;
 
-	// console.log(tip);
+	console.log(tip);
 
 	if (total!=0 && tip!=0 && head!=0 && !isNaN(total) && !isNaN(tip) && !isNaN(head)) {
-		resultTip = total*tax+total*(tip-1);
+		resultTip = total*tax*(tip-1);
 		grandTotal = total*tax*tip;
 		perHead = grandTotal/head;
 
@@ -103,6 +104,12 @@ function calTip() {
 
 
 taxIsOpen = false;
+if (localStorage["tax"] != undefined || localStorage["tax"] != "" || localStorage["tax"] != 0) {
+	$("#user-tax").val(localStorage["tax"]);
+}
+if (localStorage["tip"] != undefined || localStorage["tip"] != "" || localStorage["tip"] != 0) {
+	$("#user-tip").val(localStorage["tip"]);
+}
 // tipIsOpen = false;
 
 $("#user-total").bind("keyup change",function(){
@@ -110,11 +117,11 @@ $("#user-total").bind("keyup change",function(){
 })
 
 $("#user-tax").bind("keyup change",function(){
-	var tax = parseInt($("#user-tax").val());
+	var tax = parseFloat($("#user-tax").val());
 	if (tax !=0 && !isNaN(tax)) {
 		taxIsOpen=true;
+		localStorage["tax"] = tax;
 		$("#tax-toggle").addClass("on");
-		
 	}
 	else {
 		taxIsOpen=false;
@@ -125,6 +132,7 @@ $("#user-tax").bind("keyup change",function(){
 
 $("#user-tip").bind("keyup change",function(){
 	var tip = parseInt($("#user-tip").val());
+	localStorage["tip"] = tip;
 	// if (tip !=0 && !isNaN(tip)) {
 	// 	tipIsOpen=true;
 	// 	$("#tip-toggle").addClass("on");
